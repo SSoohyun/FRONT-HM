@@ -404,7 +404,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th style="width: 5%"><input type="checkbox" checked></th>
+                                            <th style="width: 3%;"><input type="checkbox" class="check-all" checked></th>
                                             <th style="width: 10%">요청일</th>
                                             <th style="width: 10%">요청자</th>
                                             <th style="width: 50%">내용</th>
@@ -413,7 +413,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="checkbox" checked></td>
+                                            <td><input type="checkbox" class="ch" checked></td>
                                             <td>2008/12/19</td>
                                             <td>Tiger Nixon</td>
                                             <td>문서 복호화 허가</td>
@@ -423,7 +423,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" checked></td>
+                                            <td><input type="checkbox" class="ch" checked></td>
                                             <td>2010/10/14</td>
                                             <td>Garrett Winters</td>
                                             <td>회의실 사용 승인해주세요~~</td>
@@ -433,7 +433,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" checked></td>
+                                            <td><input type="checkbox" class="ch" checked></td>
                                             <td>2013/03/03</td>
                                             <td>Ashton Cox</td>
                                             <td>휴가 사용 승인해주십쇼~</td>
@@ -443,7 +443,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" checked></td>
+                                            <td><input type="checkbox" class="ch" checked></td>
                                             <td>2008/10/16</td>
                                             <td>Cedric Kelly</td>
                                             <td>개발 승인 부탁드립니다.</td>
@@ -453,7 +453,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" checked></td>
+                                            <td><input type="checkbox" class="ch" checked></td>
                                             <td>2012/12/18</td>
                                             <td>Airi Satou</td>
                                             <td>문서 암호화 승인해주세요..</td>
@@ -463,7 +463,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" checked></td>
+                                            <td><input type="checkbox" class="ch" checked></td>
                                             <td>2010/03/17</td>
                                             <td>Brielle Williamson</td>
                                             <td>개발 완료!</td>
@@ -473,7 +473,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" checked></td>
+                                            <td><input type="checkbox" class="ch" checked></td>
                                             <td>2010/06/09</td>
                                             <td>Herrod Chandler</td>
                                             <td>css 구현 완료했습니다.</td>
@@ -483,7 +483,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" checked></td>
+                                            <td><input type="checkbox" class="ch" checked></td>
                                             <td>2011/09/03</td>
                                             <td>Paul Byrd</td>
                                             <td>ㅁㅁㅁㅁㅁㅁㅁㅁㅁ</td>
@@ -493,7 +493,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" checked></td>
+                                            <td><input type="checkbox" class="ch" checked></td>
                                             <td>2009/04/10</td>
                                             <td>Gloria Little</td>
                                             <td>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</td>
@@ -503,7 +503,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" checked></td>
+                                            <td><input type="checkbox" class="ch" checked></td>
                                             <td>2012/09/26</td>
                                             <td>Dai Rios</td>
                                             <td>test</td>
@@ -595,7 +595,8 @@
             //     $('#' + tab_id).addClass('show');
             //     $('#' + tab_id).addClass('active');
             // });
-
+            
+            // 달력
             $.datepicker.setDefaults({
                 closeText: "닫기",
                 prevText: "이전달",
@@ -618,6 +619,11 @@
 
             $(".datepicker").datepicker({
                 minDate: 0
+            });
+
+            // 체크박스
+            $('.check-all').click(function() {
+                $('.ch').prop('checked', this.checked); // checked 속성 true
             });
         });
     </script>
