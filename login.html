@@ -58,7 +58,8 @@
         padding-bottom: 0 !important;
     }
     .my-10 {
-        margin-top: 15%;
+        margin-top: 20%;
+        margin-bottom: 10%;
         /* transform: translateY(-50%); */
     }
 </style>
@@ -136,23 +137,25 @@
     <script src="js/sb-admin-2.min.js"></script>
 
     <script>
-        $(".admin").css("color", "gray");
-        $(".admin").css("border-bottom", "none");
-        
-        $(".admin").click(function() {
-            $(".general").css("color", "gray");
-            $(".general").css("border-bottom", "none");
-            $(".admin").css("color", "#d2c5a5");
-            $(".admin").css("border-bottom", "solid 3px #d2c5a5");
-            $(".user a").addClass("btn-warning");
-        });
-
-        $(".general").click(function() {
-            $(".general").css("color", "#3498db");
-            $(".general").css("border-bottom", "solid 3px #3498db");
+        $(document).ready(function() {
             $(".admin").css("color", "gray");
             $(".admin").css("border-bottom", "none");
-            $(".user a").removeClass("btn-warning");
+            
+            $(".admin").click(function() {
+                $(".general").css("color", "gray");
+                $(".general").css("border-bottom", "none");
+                $(".admin").css("color", "#d2c5a5");
+                $(".admin").css("border-bottom", "solid 3px #d2c5a5");
+                $(".user a").addClass("btn-warning");
+            });
+
+            $(".general").click(function() {
+                $(".general").css("color", "#3498db");
+                $(".general").css("border-bottom", "solid 3px #3498db");
+                $(".admin").css("color", "gray");
+                $(".admin").css("border-bottom", "none");
+                $(".user a").removeClass("btn-warning");
+            });
         });
     </script>
 

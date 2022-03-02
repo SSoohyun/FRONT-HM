@@ -12,16 +12,27 @@
     <title>SB Admin 2 - Tables</title>
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+
+    <!-- new fontawesome -->
+    <script src="https://kit.fontawesome.com/e8c5575acc.js" crossorigin="anonymous"></script>
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    
+    <!-- calendar -->
+    <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="css/calendar.css" rel="stylesheet">
 
     <style>
         .bg-gradient-primary {
@@ -29,20 +40,107 @@
             background-image: linear-gradient(20deg,rgb(210, 197, 165) 5%,#4e73df 100%);
             background-size: cover;
         }
-    
+        
         th {
             background: #f8f9fc;
         }
 
-        .tab {
+        /* .tab {
             display: flex;
             flex-direction: row;
             align-items: center;
         }
 
         .card-header {
-            border-right: 1px solid #e3e6f0;
+            border: 1px solid #e3e6f0;
             border-radius: calc(.35rem - 1px) calc(.35rem - 1px) 0 0;
+        }
+
+        .card {
+            border-top-left-radius: 0;
+        }
+
+        .fade {
+            transition: opacity .15s linear;
+        } */
+
+        .nav-tabs .nav-link {
+            padding: 0.75rem 1.25rem;
+        }
+
+        .nav-tabs {
+            border-bottom: transparent;
+        }
+
+        .input-date {
+            position: relative;
+            align-items: center;
+        }
+
+        .input-date i {
+            position: absolute;
+            left: 82%;
+            top: 5.5%;
+            padding: 10px 10px;
+            color: gray;
+        }
+
+        .tab-content {
+            padding: 1.25rem;
+        }
+
+        .tab-content > .active {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .period {
+            width: 30%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            margin-right: 5%;
+        }
+
+        .period-btn {
+            width: 20%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* table.dataTable>thead>tr>th:first-child {
+            padding-left: 0;
+            text-align: center;
+        }
+
+        table.dataTable>thead>tr>th:first-child,
+        table.dataTable>thead>tr>th:last-child {
+            padding-right: 0;
+        } */
+
+        table.dataTable>thead>tr>th:first-child::before,
+        table.dataTable>thead>tr>th:first-child::after,
+        table.dataTable>thead>tr>th:last-child::before,
+        table.dataTable>thead>tr>th:last-child::after {
+            content: none;
+        }
+
+        .table td,
+        .table th {
+            vertical-align: middle;
+        }
+        
+        /* .sorting_1 {
+            text-align: center;
+        } */
+
+        .btn-sm {
+            border-radius: 0.5rem;
+            border: 0;
         }
     </style>
 </head>
@@ -230,29 +328,72 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">승인요청 관리</h1>
                     <p class="mb-4">
-                        승인요청을 확인하고, 승인 또는 거부할 수 있습니다.
+                        승인요청을 확인하고, 요청을 승인 또는 거부할 수 있습니다.
                     </p>
                     
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link py-3 shadow active" data-toggle="tab" href="#tab1">
+                                <h6 class="m-0 font-weight-bold text-primary">결재 대기</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link py-3 shadow" data-toggle="tab" href="#tab2">
+                                <h6 class="m-0 font-weight-bold text-primary">처리 완료</h6>
+                            </a>
+                        </li>
+                    </ul>
+
                     <div class="card shadow mb-4">
-                        <div class="tab">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">탭1</h6>
+                        <div class="tab-content">
+                            <h6 class="font-weight-bold">기간</h6>
+                            <div class="tab-pane fade show active" id="tab1">
+                                <!-- 날짜 -->
+                                <div class="period">
+                                    <div class="input-date">
+                                        <input type="text" name="" value="" class="datepicker inp" placeholder="시작일" readonly="true" />
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                    <i class="fa-solid fa-minus"></i>
+                                    <div class="input-date datapicker">
+                                        <input type="text" name="" value="" class="datepicker inp" placeholder="종료일" readonly="true" /> 
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                </div>
+
+                                <!-- 버튼 -->
+                                <div class="period-btn">
+                                    <a class="btn btn-secondary">오늘</a>
+                                    <a class="btn btn-secondary">7일</a>
+                                    <a class="btn btn-secondary">30일</a>
+                                    <a class="btn btn-secondary">전체</a>
+                                </div>
                             </div>
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">탭2</h6>
+                            <div class="tab-pane fade show" id="tab2">
+                                <!-- 날짜 -->
+                                <div class="period">
+                                    <div class="input-date">
+                                        <input type="text" name="" value="" class="datepicker inp" placeholder="시작일" readonly="true" />
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                    <i class="fa-solid fa-minus"></i>
+                                    <div class="input-date datapicker">
+                                        <input type="text" name="" value="" class="datepicker inp" placeholder="종료일" readonly="true" /> 
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                </div>
+
+                                <!-- 버튼 -->
+                                <div class="period-btn">
+                                    <a class="btn btn-secondary">오늘</a>
+                                    <a class="btn btn-secondary">7일</a>
+                                    <a class="btn btn-secondary">30일</a>
+                                    <a class="btn btn-secondary">전체</a>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="card-body">
-                            <div>11</div>
-                            <div>22</div>
-                            <div>33</div>
-                            <div>44</div>
-                            <div>55</div>
                         </div>
                     </div>
-
-
+                    
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -263,480 +404,113 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th style="width: 5%"><input type="checkbox" checked></th>
+                                            <th style="width: 10%">요청일</th>
+                                            <th style="width: 10%">요청자</th>
+                                            <th style="width: 50%">내용</th>
+                                            <th style="width: 10%">승인</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brielle Williamson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2012/12/02</td>
-                                            <td>$372,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Herrod Chandler</td>
-                                            <td>Sales Assistant</td>
-                                            <td>San Francisco</td>
-                                            <td>59</td>
-                                            <td>2012/08/06</td>
-                                            <td>$137,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>Tokyo</td>
-                                            <td>55</td>
-                                            <td>2010/10/14</td>
-                                            <td>$327,900</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>Javascript Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>39</td>
-                                            <td>2009/09/15</td>
-                                            <td>$205,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sonya Frost</td>
-                                            <td>Software Engineer</td>
-                                            <td>Edinburgh</td>
-                                            <td>23</td>
-                                            <td>2008/12/13</td>
-                                            <td>$103,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jena Gaines</td>
-                                            <td>Office Manager</td>
-                                            <td>London</td>
-                                            <td>30</td>
+                                            <td><input type="checkbox" checked></td>
                                             <td>2008/12/19</td>
-                                            <td>$90,560</td>
+                                            <td>Tiger Nixon</td>
+                                            <td>문서 복호화 허가</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm">허가</a>
+                                                <a class="btn btn-sm btn-secondary">거부</a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Quinn Flynn</td>
-                                            <td>Support Lead</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
+                                            <td><input type="checkbox" checked></td>
+                                            <td>2010/10/14</td>
+                                            <td>Garrett Winters</td>
+                                            <td>회의실 사용 승인해주세요~~</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm">허가</a>
+                                                <a class="btn btn-sm btn-secondary">거부</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" checked></td>
                                             <td>2013/03/03</td>
-                                            <td>$342,000</td>
+                                            <td>Ashton Cox</td>
+                                            <td>휴가 사용 승인해주십쇼~</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm">허가</a>
+                                                <a class="btn btn-sm btn-secondary">거부</a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Charde Marshall</td>
-                                            <td>Regional Director</td>
-                                            <td>San Francisco</td>
-                                            <td>36</td>
+                                            <td><input type="checkbox" checked></td>
                                             <td>2008/10/16</td>
-                                            <td>$470,600</td>
+                                            <td>Cedric Kelly</td>
+                                            <td>개발 승인 부탁드립니다.</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm">허가</a>
+                                                <a class="btn btn-sm btn-secondary">거부</a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Haley Kennedy</td>
-                                            <td>Senior Marketing Designer</td>
-                                            <td>London</td>
-                                            <td>43</td>
+                                            <td><input type="checkbox" checked></td>
                                             <td>2012/12/18</td>
-                                            <td>$313,500</td>
+                                            <td>Airi Satou</td>
+                                            <td>문서 암호화 승인해주세요..</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm">허가</a>
+                                                <a class="btn btn-sm btn-secondary">거부</a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Tatyana Fitzpatrick</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>19</td>
+                                            <td><input type="checkbox" checked></td>
                                             <td>2010/03/17</td>
-                                            <td>$385,750</td>
+                                            <td>Brielle Williamson</td>
+                                            <td>개발 완료!</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm">허가</a>
+                                                <a class="btn btn-sm btn-secondary">거부</a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Michael Silva</td>
-                                            <td>Marketing Designer</td>
-                                            <td>London</td>
-                                            <td>66</td>
-                                            <td>2012/11/27</td>
-                                            <td>$198,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Paul Byrd</td>
-                                            <td>Chief Financial Officer (CFO)</td>
-                                            <td>New York</td>
-                                            <td>64</td>
+                                            <td><input type="checkbox" checked></td>
                                             <td>2010/06/09</td>
-                                            <td>$725,000</td>
+                                            <td>Herrod Chandler</td>
+                                            <td>css 구현 완료했습니다.</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm">허가</a>
+                                                <a class="btn btn-sm btn-secondary">거부</a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Gloria Little</td>
-                                            <td>Systems Administrator</td>
-                                            <td>New York</td>
-                                            <td>59</td>
-                                            <td>2009/04/10</td>
-                                            <td>$237,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bradley Greer</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>41</td>
-                                            <td>2012/10/13</td>
-                                            <td>$132,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dai Rios</td>
-                                            <td>Personnel Lead</td>
-                                            <td>Edinburgh</td>
-                                            <td>35</td>
-                                            <td>2012/09/26</td>
-                                            <td>$217,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jenette Caldwell</td>
-                                            <td>Development Lead</td>
-                                            <td>New York</td>
-                                            <td>30</td>
+                                            <td><input type="checkbox" checked></td>
                                             <td>2011/09/03</td>
-                                            <td>$345,000</td>
+                                            <td>Paul Byrd</td>
+                                            <td>ㅁㅁㅁㅁㅁㅁㅁㅁㅁ</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm">허가</a>
+                                                <a class="btn btn-sm btn-secondary">거부</a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Yuri Berry</td>
-                                            <td>Chief Marketing Officer (CMO)</td>
-                                            <td>New York</td>
-                                            <td>40</td>
-                                            <td>2009/06/25</td>
-                                            <td>$675,000</td>
+                                            <td><input type="checkbox" checked></td>
+                                            <td>2009/04/10</td>
+                                            <td>Gloria Little</td>
+                                            <td>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm">허가</a>
+                                                <a class="btn btn-sm btn-secondary">거부</a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Caesar Vance</td>
-                                            <td>Pre-Sales Support</td>
-                                            <td>New York</td>
-                                            <td>21</td>
-                                            <td>2011/12/12</td>
-                                            <td>$106,450</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Doris Wilder</td>
-                                            <td>Sales Assistant</td>
-                                            <td>Sidney</td>
-                                            <td>23</td>
-                                            <td>2010/09/20</td>
-                                            <td>$85,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Angelica Ramos</td>
-                                            <td>Chief Executive Officer (CEO)</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2009/10/09</td>
-                                            <td>$1,200,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gavin Joyce</td>
-                                            <td>Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>42</td>
-                                            <td>2010/12/22</td>
-                                            <td>$92,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Chang</td>
-                                            <td>Regional Director</td>
-                                            <td>Singapore</td>
-                                            <td>28</td>
-                                            <td>2010/11/14</td>
-                                            <td>$357,650</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brenden Wagner</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>28</td>
-                                            <td>2011/06/07</td>
-                                            <td>$206,850</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fiona Green</td>
-                                            <td>Chief Operating Officer (COO)</td>
-                                            <td>San Francisco</td>
-                                            <td>48</td>
-                                            <td>2010/03/11</td>
-                                            <td>$850,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shou Itou</td>
-                                            <td>Regional Marketing</td>
-                                            <td>Tokyo</td>
-                                            <td>20</td>
-                                            <td>2011/08/14</td>
-                                            <td>$163,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michelle House</td>
-                                            <td>Integration Specialist</td>
-                                            <td>Sidney</td>
-                                            <td>37</td>
-                                            <td>2011/06/02</td>
-                                            <td>$95,400</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suki Burks</td>
-                                            <td>Developer</td>
-                                            <td>London</td>
-                                            <td>53</td>
-                                            <td>2009/10/22</td>
-                                            <td>$114,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Prescott Bartlett</td>
-                                            <td>Technical Author</td>
-                                            <td>London</td>
-                                            <td>27</td>
-                                            <td>2011/05/07</td>
-                                            <td>$145,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gavin Cortez</td>
-                                            <td>Team Leader</td>
-                                            <td>San Francisco</td>
-                                            <td>22</td>
-                                            <td>2008/10/26</td>
-                                            <td>$235,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Martena Mccray</td>
-                                            <td>Post-Sales support</td>
-                                            <td>Edinburgh</td>
-                                            <td>46</td>
-                                            <td>2011/03/09</td>
-                                            <td>$324,050</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Unity Butler</td>
-                                            <td>Marketing Designer</td>
-                                            <td>San Francisco</td>
-                                            <td>47</td>
-                                            <td>2009/12/09</td>
-                                            <td>$85,675</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Howard Hatfield</td>
-                                            <td>Office Manager</td>
-                                            <td>San Francisco</td>
-                                            <td>51</td>
-                                            <td>2008/12/16</td>
-                                            <td>$164,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hope Fuentes</td>
-                                            <td>Secretary</td>
-                                            <td>San Francisco</td>
-                                            <td>41</td>
-                                            <td>2010/02/12</td>
-                                            <td>$109,850</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vivian Harrell</td>
-                                            <td>Financial Controller</td>
-                                            <td>San Francisco</td>
-                                            <td>62</td>
-                                            <td>2009/02/14</td>
-                                            <td>$452,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Timothy Mooney</td>
-                                            <td>Office Manager</td>
-                                            <td>London</td>
-                                            <td>37</td>
-                                            <td>2008/12/11</td>
-                                            <td>$136,200</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jackson Bradshaw</td>
-                                            <td>Director</td>
-                                            <td>New York</td>
-                                            <td>65</td>
-                                            <td>2008/09/26</td>
-                                            <td>$645,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Olivia Liang</td>
-                                            <td>Support Engineer</td>
-                                            <td>Singapore</td>
-                                            <td>64</td>
-                                            <td>2011/02/03</td>
-                                            <td>$234,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bruno Nash</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>38</td>
-                                            <td>2011/05/03</td>
-                                            <td>$163,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sakura Yamamoto</td>
-                                            <td>Support Engineer</td>
-                                            <td>Tokyo</td>
-                                            <td>37</td>
-                                            <td>2009/08/19</td>
-                                            <td>$139,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Thor Walton</td>
-                                            <td>Developer</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2013/08/11</td>
-                                            <td>$98,540</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Finn Camacho</td>
-                                            <td>Support Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>47</td>
-                                            <td>2009/07/07</td>
-                                            <td>$87,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Serge Baldwin</td>
-                                            <td>Data Coordinator</td>
-                                            <td>Singapore</td>
-                                            <td>64</td>
-                                            <td>2012/04/09</td>
-                                            <td>$138,575</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zenaida Frank</td>
-                                            <td>Software Engineer</td>
-                                            <td>New York</td>
-                                            <td>63</td>
-                                            <td>2010/01/04</td>
-                                            <td>$125,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zorita Serrano</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>56</td>
-                                            <td>2012/06/01</td>
-                                            <td>$115,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Acosta</td>
-                                            <td>Junior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>43</td>
-                                            <td>2013/02/01</td>
-                                            <td>$75,650</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cara Stevens</td>
-                                            <td>Sales Assistant</td>
-                                            <td>New York</td>
-                                            <td>46</td>
-                                            <td>2011/12/06</td>
-                                            <td>$145,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hermione Butler</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2011/03/21</td>
-                                            <td>$356,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lael Greer</td>
-                                            <td>Systems Administrator</td>
-                                            <td>London</td>
-                                            <td>21</td>
-                                            <td>2009/02/27</td>
-                                            <td>$103,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jonas Alexander</td>
-                                            <td>Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>30</td>
-                                            <td>2010/07/14</td>
-                                            <td>$86,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shad Decker</td>
-                                            <td>Regional Director</td>
-                                            <td>Edinburgh</td>
-                                            <td>51</td>
-                                            <td>2008/11/13</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>29</td>
-                                            <td>2011/06/27</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>27</td>
-                                            <td>2011/01/25</td>
-                                            <td>$112,000</td>
+                                            <td><input type="checkbox" checked></td>
+                                            <td>2012/09/26</td>
+                                            <td>Dai Rios</td>
+                                            <td>test</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm">허가</a>
+                                                <a class="btn btn-sm btn-secondary">거부</a>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -790,9 +564,9 @@
             </div>
         </div>
     </div>
-
+    
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -808,6 +582,45 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            // $(".tab .card-header").click(function() {
+            //     let tab_id = $(this).attr('data-tab');
+
+            //     $('.tab .card-header').removeClass('active');
+            //     $('.tab-content').removeClass('show');
+            //     $('.tab-content').removeClass('active');
+
+            //     $(this).addClass('active');
+            //     $('#' + tab_id).addClass('show');
+            //     $('#' + tab_id).addClass('active');
+            // });
+
+            $.datepicker.setDefaults({
+                closeText: "닫기",
+                prevText: "이전달",
+                nextText: "다음달",
+                currentText: "오늘",
+                monthNames: ["1월", "2월", "3월", "4월", "5월", "6월",
+                    "7월", "8월", "9월", "10월", "11월", "12월"],
+                monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월",
+                    "7월", "8월", "9월", "10월", "11월", "12월"],
+                dayNames: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
+                dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
+                dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+                weekHeader: "주",
+                dateFormat: "yy.m.d", // 날짜형태 예)yy년 m월 d일
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: true,
+                yearSuffix: "년"
+            });
+
+            $(".datepicker").datepicker({
+                minDate: 0
+            });
+        });
+    </script>
 </body>
 
 </html>
