@@ -23,6 +23,12 @@
 </head>
 
 <style>
+    .bg-gradient-admin {
+        background-color: #f8f9fc;
+        background-image: linear-gradient(180deg,#f8f9fc 10%,#d2c5a5 100%);
+        background-size: cover;
+    }
+
     .logo {
         font-size: 2rem;
         font-weight: 800;
@@ -57,11 +63,9 @@
     .p-4 {
         padding-bottom: 0 !important;
     }
-    .my-10 {
-        margin-top: 20%;
-        margin-bottom: 10%;
-        /* transform: translateY(-50%); */
-    }
+    /* .my-10 {
+        margin-top: 0;
+    } */
 </style>
 
 <body class="bg-gradient-light">
@@ -73,7 +77,7 @@
 
             <div class="col-xl-8 col-lg-12 col-md-9">
 
-                <div class="card o-hidden border-0 shadow-lg my-10">
+                <div class="card o-hidden border-0 shadow-lg">
                     
                     <div class="card-body">
                         <a class="logo d-flex align-items-center justify-content-center p-4">
@@ -138,6 +142,12 @@
 
     <script>
         $(document).ready(function() {
+            // 창 위치
+            var element_height = $(".card").height();
+            $(".card").css("margin-top", "calc((100vh - " + element_height + "px)/2)");
+            $(".card").css("margin-bottom", "calc((100vh - " + element_height + "px)/2)");
+
+            // 탭
             $(".admin").css("color", "gray");
             $(".admin").css("border-bottom", "none");
             
@@ -147,6 +157,8 @@
                 $(".admin").css("color", "#d2c5a5");
                 $(".admin").css("border-bottom", "solid 3px #d2c5a5");
                 $(".user a").addClass("btn-warning");
+                
+                $('body').addClass('bg-gradient-admin');
             });
 
             $(".general").click(function() {
@@ -155,6 +167,8 @@
                 $(".admin").css("color", "gray");
                 $(".admin").css("border-bottom", "none");
                 $(".user a").removeClass("btn-warning");
+
+                $('body').removeClass('bg-gradient-admin');
             });
         });
     </script>
