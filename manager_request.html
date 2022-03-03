@@ -39,6 +39,9 @@
     <!-- modal -->
     <link href="css/modal.css" rel="stylesheet">
 
+    <!-- radio -->
+    <link href="css/radio.css" rel="stylesheet">
+
     <style>
         .bg-gradient-primary {
             background-color: rgb(210, 197, 165);
@@ -389,42 +392,74 @@
                                     <button class="btn btn-info" onclick="allClear('1')">전체</button>
                                 </div> -->
                                 
-                                <div class="col-xl-12 col-md-6 mb-4 period-card">
+                                <div class="col-xl-8 col-md-6 mb-4 period-card">
                                     <div class="card border-left-primary shadow h-100 py-2">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
                                                     <div class="font-weight-bold text-primary text-uppercase mb-3">
                                                         조회기간</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800 mb-3">
-                                                        <!-- <div class="period-btn"> -->
-                                                            <button class="btn btn-sm btn-info" onclick="setSearchDate('0d')">오늘</button>
-                                                            <button class="btn btn-sm btn-info" onclick="setSearchDate('3d')">3일</button>
-                                                            <button class="btn btn-sm btn-info" onclick="week('1')">1주</button>
-                                                            <button class="btn btn-sm btn-info" onclick="month('1')">1개월</button>
-                                                            <button class="btn btn-sm btn-info" onclick="month('1')">3개월</button>
-                                                            <button class="btn btn-sm btn-info" onclick="month('1')">6개월</button>
-                                                            <button class="btn btn-sm btn-info" onclick="allClear('1')">전체</button>
-                                                        <!-- </div> -->
+                                                    <div class="h5 mb-0 mb-3">
+                                                        <ul class="searchDate">
+                                                            <li>
+                                                                <span class="chkbox">
+                                                                    <input type="radio" name="dateType" id="dateType1" class="btn btn-sm btn-info" onclick="setSearchDate('0d')" />
+                                                                    <label for="dateType1">당일</label>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="chkbox">
+                                                                    <input type="radio" name="dateType" id="dateType2" onclick="setSearchDate('3d')" />
+                                                                    <label for="dateType2">3일</label>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="chkbox">
+                                                                    <input type="radio" name="dateType" id="dateType3" onclick="setSearchDate('1w')" />
+                                                                    <label for="dateType3">1주</label>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="chkbox">
+                                                                    <input type="radio" name="dateType" id="dateType4" onclick="setSearchDate('2w')" />
+                                                                    <label for="dateType4">2주</label>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="chkbox">
+                                                                    <input type="radio" name="dateType" id="dateType5" onclick="setSearchDate('1m')" />
+                                                                    <label for="dateType5">1개월</label>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="chkbox">
+                                                                    <input type="radio" name="dateType" id="dateType6" onclick="setSearchDate('3m')" />
+                                                                    <label for="dateType6">3개월</label>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="chkbox">
+                                                                    <input type="radio" name="dateType" id="dateType7" onclick="setSearchDate('6m')" />
+                                                                    <label for="dateType7">6개월</label>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                         <div class="period">
                                                             <div class="input-date">
-                                                                <input type="text" name="" value="" class="datepicker inp" id="start-date1"
+                                                                <input type="text" name="start-date1" value="" class="datepicker inp" id="start-date1"
                                                                     placeholder="시작일" readonly />
                                                                 <i class="fa-regular fa-calendar-days"></i>
                                                             </div>
                                                             <i class="fa-solid fa-minus"></i>
                                                             <div class="input-date">
-                                                                <input type="text" name="" value="" class="datepicker inp" id="end-date1"
+                                                                <input type="text" name="end-date1" value="" class="datepicker inp" id="end-date1"
                                                                     placeholder="종료일" readonly />
                                                                 <i class="fa-regular fa-calendar-days"></i>
                                                             </div>
                                                         </div>
                                                     </div> 
-                                                </div>
-                                                <div class="col-auto">
-                                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -937,7 +972,28 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
 
+    <!-- datepicker to korean -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+    
     <script>
+        // Search Date
+        jQuery.fn.schDate = function () {
+            var $obj = $(this);
+            var $chk = $obj.find("input[type=radio]");
+            $chk.click(function () {
+                $('input:not(:checked)').parent(".chkbox").removeClass("on");
+                $('input:checked').parent(".chkbox").addClass("on");
+            });
+        };
+
+        // DateClick
+        jQuery.fn.dateclick = function () {
+            var $obj = $(this);
+            $obj.click(function () {
+                $(this).parent().find("input").focus();
+            });
+        }
+
         function setSearchDate(start){
 
             var num = start.substring(0,1);
@@ -950,7 +1006,7 @@
             //var day = today.getDate();
 
             var endDate = $.datepicker.formatDate('yy-mm-dd', today);
-            $('#searchEndDate').val(endDate);
+            $('#end-date1').val(endDate);
 
             if(str == 'd'){
                 today.setDate(today.getDate() - num);
@@ -962,37 +1018,37 @@
             }
 
             var startDate = $.datepicker.formatDate('yy-mm-dd', today);
-            $('#searchStartDate').val(startDate);
+            $('#start-date1').val(startDate);
                     
             // 종료일은 시작일 이전 날짜 선택하지 못하도록 비활성화
-            $("#searchEndDate").datepicker( "option", "minDate", startDate );
+            $("#end-date1").datepicker( "option", "minDate", startDate );
 
             // 시작일은 종료일 이후 날짜 선택하지 못하도록 비활성화
-            $("#searchStartDate").datepicker( "option", "maxDate", endDate );
+            $("#start-date1").datepicker( "option", "maxDate", endDate );
 
         }
 
-        // 기간 버튼
-        function today(n) {
-            document.getElementById('start-date' + n).value = new Date().toISOString().substring(0, 10);
-            document.getElementById('end-date' + n).value = new Date().toISOString().substring(0, 10);
-        }
-        function week(n) {
-            var date = new Date();
-            date.setDate(date.getDate() - 7);
-            document.getElementById('start-date' + n).value = date.toISOString().substring(0, 10);
-            document.getElementById('end-date' + n).value = new Date().toISOString().substring(0, 10);
-        }
-        function month(n) {
-            var date = new Date();
-            date.setMonth(date.getMonth() + 1);
-            document.getElementById('start-date' + n).value = new Date().toISOString().substring(0, 10);
-            document.getElementById('end-date' + n).value = date.toISOString().substring(0, 10);
-        }
-        function allClear(n) {
-            document.getElementById('start-date' + n).value = 0;
-            document.getElementById('end-date' + n).value = 0;
-        }
+        // // 기간 버튼
+        // function today(n) {
+        //     document.getElementById('start-date' + n).value = new Date().toISOString().substring(0, 10);
+        //     document.getElementById('end-date' + n).value = new Date().toISOString().substring(0, 10);
+        // }
+        // function week(n) {
+        //     var date = new Date();
+        //     date.setDate(date.getDate() - 7);
+        //     document.getElementById('start-date' + n).value = date.toISOString().substring(0, 10);
+        //     document.getElementById('end-date' + n).value = new Date().toISOString().substring(0, 10);
+        // }
+        // function month(n) {
+        //     var date = new Date();
+        //     date.setMonth(date.getMonth() + 1);
+        //     document.getElementById('start-date' + n).value = new Date().toISOString().substring(0, 10);
+        //     document.getElementById('end-date' + n).value = date.toISOString().substring(0, 10);
+        // }
+        // function allClear(n) {
+        //     document.getElementById('start-date' + n).value = 0;
+        //     document.getElementById('end-date' + n).value = 0;
+        // }
 
 
         $(document).ready(function () {
@@ -1009,47 +1065,74 @@
             // });
 
             // 달력
-            $.datepicker.setDefaults({
-                closeText: "닫기",
-                prevText: "이전달",
-                nextText: "다음달",
-                currentText: "오늘",
-                monthNames: ["1월", "2월", "3월", "4월", "5월", "6월",
-                    "7월", "8월", "9월", "10월", "11월", "12월"],
-                monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월",
-                    "7월", "8월", "9월", "10월", "11월", "12월"],
-                dayNames: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
-                dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
-                dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
-                weekHeader: "주",
-                dateFormat: "yy-mm-dd", // 날짜형태 예) yy년 mm월 dd일
-                firstDay: 0,
-                isRTL: false,
-                showMonthAfterYear: true,
-                yearSuffix: "년"
+            // $.datepicker.setDefaults({
+            //     closeText: "닫기",
+            //     prevText: "이전달",
+            //     nextText: "다음달",
+            //     currentText: "오늘",
+            //     monthNames: ["1월", "2월", "3월", "4월", "5월", "6월",
+            //         "7월", "8월", "9월", "10월", "11월", "12월"],
+            //     monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월",
+            //         "7월", "8월", "9월", "10월", "11월", "12월"],
+            //     dayNames: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
+            //     dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
+            //     dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+            //     weekHeader: "주",
+            //     dateFormat: "yy-mm-dd", // 날짜형태 예) yy년 mm월 dd일
+            //     firstDay: 0,
+            //     isRTL: false,
+            //     showMonthAfterYear: true,
+            //     yearSuffix: "년"
+            // });
+
+            $.datepicker.setDefaults($.datepicker.regional['ko']);
+            
+            $(".datepicker").datepicker({
+                showButtonPanel: true,
+                dateFormat: "yy-mm-dd",
+                onClose: function (selectedDate) {
+
+                    var eleId = $(this).attr("id");
+                    var optionName = "";
+
+                    if (eleId.indexOf("StartDate") > 0) {
+                        eleId = eleId.replace("StartDate", "EndDate");
+                        optionName = "minDate";
+                    } else {
+                        eleId = eleId.replace("EndDate", "StartDate");
+                        optionName = "maxDate";
+                    }
+
+                    $("#" + eleId).datepicker("option", optionName, selectedDate);
+                    $(".searchDate").find(".chkbox").removeClass("on");
+                }
             });
 
-            $(".datepicker").datepicker();
+            $(".dateclick").dateclick();    // DateClick
+            $(".searchDate").schDate();        // searchDate
 
-            $('#start-date1').datepicker("option", "maxDate", $('#end-date1').val());
-            $('#start-date1').datepicker("option", "onClose", function (selectedDate) {
-                $('#end-date1').datepicker("option", "minDate", selectedDate);
-            });
+            // $(".datepicker").datepicker();
 
-            $('#end-date1').datepicker("option", "minDate", $('#start-date1').val());
-            $('#end-date1').datepicker("option", "onClose", function (selectedDate) {
-                $('#start-date1').datepicker("option", "maxDate", selectedDate);
-            });
+            // $('#start-date1').datepicker("option", "maxDate", $('#end-date1').val());
+            // $('#start-date1').datepicker("option", "onClose", function (selectedDate) {
+            //     $('#end-date1').datepicker("option", "minDate", selectedDate);
+            // });
 
-            $('#start-date2').datepicker("option", "maxDate", $('#end-date2').val());
-            $('#start-date2').datepicker("option", "onClose", function (selectedDate) {
-                $('#end-date2').datepicker("option", "minDate", selectedDate);
-            });
+            // $('#end-date1').datepicker("option", "minDate", $('#start-date1').val());
+            // $('#end-date1').datepicker("option", "onClose", function (selectedDate) {
+            //     $('#start-date1').datepicker("option", "maxDate", selectedDate);
+            // });
 
-            $('#end-date2').datepicker("option", "minDate", $('#start-date2').val());
-            $('#end-date2').datepicker("option", "onClose", function (selectedDate) {
-                $('#start-date2').datepicker("option", "maxDate", selectedDate);
-            });
+            // $('#start-date2').datepicker("option", "maxDate", $('#end-date2').val());
+            // $('#start-date2').datepicker("option", "onClose", function (selectedDate) {
+            //     $('#end-date2').datepicker("option", "minDate", selectedDate);
+            // });
+
+            // $('#end-date2').datepicker("option", "minDate", $('#start-date2').val());
+            // $('#end-date2').datepicker("option", "onClose", function (selectedDate) {
+            //     $('#start-date2').datepicker("option", "maxDate", selectedDate);
+            // });
+            
 
             // 테이블
             $('#dataTable1').DataTable();
