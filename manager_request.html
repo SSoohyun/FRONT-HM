@@ -25,22 +25,27 @@
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
+
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
-    
+
     <!-- calendar -->
-    <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css"
+        rel="stylesheet" />
+    <script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <link href="css/calendar.css" rel="stylesheet">
+
+    <!-- modal -->
+    <link href="css/modal.css" rel="stylesheet">
 
     <style>
         .bg-gradient-primary {
             background-color: rgb(210, 197, 165);
-            background-image: linear-gradient(20deg,rgb(210, 197, 165) 5%,#4e73df 100%);
+            background-image: linear-gradient(20deg, rgb(210, 197, 165) 5%, #4e73df 100%);
             background-size: cover;
         }
-        
+
         th {
             background: #f8f9fc;
         }
@@ -69,7 +74,7 @@
         }
 
         .nav-tabs {
-            border-bottom: transparent;
+            border-bottom: transparent !important;
         }
 
         .input-date {
@@ -89,10 +94,15 @@
             padding: 1.25rem;
         }
 
-        .tab-content > .active {
+        /* .tab-content>.active {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: center;
+        } */
+
+        .period-card {
+            padding-left: 0;
+            padding-right: 0;
         }
 
         .period {
@@ -101,16 +111,15 @@
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            margin-right: 5%;
         }
 
-        .period-btn {
+        /* .period-btn {
             width: 20%;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-        }
+        } */
 
         /* table.dataTable>thead>tr>th:first-child {
             padding-left: 0;
@@ -133,7 +142,7 @@
         .table th {
             vertical-align: middle;
         }
-        
+
         /* .sorting_1 {
             text-align: center;
         } */
@@ -141,6 +150,19 @@
         .btn-sm {
             border-radius: 0.5rem;
             border: 0;
+        }
+
+        .title {
+            font-size: 1.3rem;
+        }
+
+        .content-detail {
+            /* color: #858796; */
+        }
+
+        .content-detail:hover {
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -193,7 +215,7 @@
                     <i class="fas fa-fw fa-list"></i>
                     <span>승인자 목록</span></a>
             </li>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -283,7 +305,7 @@
                             </div>
                         </li>
 
-                        
+
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -291,8 +313,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -330,7 +351,7 @@
                     <p class="mb-4">
                         승인요청을 확인하고, 요청을 승인 또는 거부할 수 있습니다.
                     </p>
-                    
+
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <a class="nav-link py-3 shadow active" data-toggle="tab" href="#tab1">
@@ -346,178 +367,453 @@
 
                     <div class="card shadow mb-4">
                         <div class="tab-content">
-                            <h6 class="font-weight-bold">기간</h6>
                             <div class="tab-pane fade show active" id="tab1">
-                                <!-- 날짜 -->
-                                <div class="period">
+                                <!-- <div class="period">
                                     <div class="input-date">
-                                        <input type="text" name="" value="" class="datepicker inp" placeholder="시작일" readonly="true" />
+                                        <input type="text" name="" value="" class="datepicker inp" id="start-date1"
+                                            placeholder="시작일" readonly />
                                         <i class="fa-regular fa-calendar-days"></i>
                                     </div>
                                     <i class="fa-solid fa-minus"></i>
-                                    <div class="input-date datapicker">
-                                        <input type="text" name="" value="" class="datepicker inp" placeholder="종료일" readonly="true" /> 
+                                    <div class="input-date">
+                                        <input type="text" name="" value="" class="datepicker inp" id="end-date1"
+                                            placeholder="종료일" readonly />
                                         <i class="fa-regular fa-calendar-days"></i>
                                     </div>
                                 </div>
 
-                                <!-- 버튼 -->
                                 <div class="period-btn">
-                                    <a class="btn btn-secondary">오늘</a>
-                                    <a class="btn btn-secondary">7일</a>
-                                    <a class="btn btn-secondary">30일</a>
-                                    <a class="btn btn-secondary">전체</a>
+                                    <button class="btn btn-info" onclick="today('1')">오늘</button>
+                                    <button class="btn btn-info" onclick="week('1')">7일</button>
+                                    <button class="btn btn-info" onclick="month('1')">30일</button>
+                                    <button class="btn btn-info" onclick="allClear('1')">전체</button>
+                                </div> -->
+                                
+                                <div class="col-xl-12 col-md-6 mb-4 period-card">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="font-weight-bold text-primary text-uppercase mb-3">
+                                                        조회기간</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800 mb-3">
+                                                        <!-- <div class="period-btn"> -->
+                                                            <button class="btn btn-sm btn-info" onclick="setSearchDate('0d')">오늘</button>
+                                                            <button class="btn btn-sm btn-info" onclick="setSearchDate('3d')">3일</button>
+                                                            <button class="btn btn-sm btn-info" onclick="week('1')">1주</button>
+                                                            <button class="btn btn-sm btn-info" onclick="month('1')">1개월</button>
+                                                            <button class="btn btn-sm btn-info" onclick="month('1')">3개월</button>
+                                                            <button class="btn btn-sm btn-info" onclick="month('1')">6개월</button>
+                                                            <button class="btn btn-sm btn-info" onclick="allClear('1')">전체</button>
+                                                        <!-- </div> -->
+                                                    </div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        <div class="period">
+                                                            <div class="input-date">
+                                                                <input type="text" name="" value="" class="datepicker inp" id="start-date1"
+                                                                    placeholder="시작일" readonly />
+                                                                <i class="fa-regular fa-calendar-days"></i>
+                                                            </div>
+                                                            <i class="fa-solid fa-minus"></i>
+                                                            <div class="input-date">
+                                                                <input type="text" name="" value="" class="datepicker inp" id="end-date1"
+                                                                    placeholder="종료일" readonly />
+                                                                <i class="fa-regular fa-calendar-days"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 테이블 -->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 3%;"><input type="checkbox" class="check-all" checked>
+                                                </th>
+                                                <th style="width: 10%;">요청일</th>
+                                                <th style="width: 10%;">요청자</th>
+                                                <th style="width: 50%;">내용</th>
+                                                <th style="width: 10%;">승인</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2008/12/19</td>
+                                                <td>Tiger Nixon</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">문서 복호화 허가</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2010/10/14</td>
+                                                <td>Garrett Winters</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">회의실 사용 승인해주세요~~</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2013/03/03</td>
+                                                <td>Ashton Cox</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">휴가 사용 승인해주십쇼~</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2008/10/16</td>
+                                                <td>Cedric Kelly</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">개발 승인 부탁드립니다.</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2012/12/18</td>
+                                                <td>Airi Satou</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">문서 암호화 승인해주세요..</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2010/03/17</td>
+                                                <td>Brielle Williamson</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">개발 완료!</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2010/06/09</td>
+                                                <td>Herrod Chandler</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">css 구현 완료했습니다.</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2011/09/03</td>
+                                                <td>Paul Byrd</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">ㅁㅁㅁㅁㅁㅁㅁㅁㅁ</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2009/04/10</td>
+                                                <td>Gloria Little</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2012/09/26</td>
+                                                <td>Dai Rios</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">test</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+
                             <div class="tab-pane fade show" id="tab2">
                                 <!-- 날짜 -->
                                 <div class="period">
                                     <div class="input-date">
-                                        <input type="text" name="" value="" class="datepicker inp" placeholder="시작일" readonly="true" />
+                                        <input type="text" name="" value="" class="datepicker inp" id="start-date2"
+                                            placeholder="시작일" readonly />
                                         <i class="fa-regular fa-calendar-days"></i>
                                     </div>
                                     <i class="fa-solid fa-minus"></i>
-                                    <div class="input-date datapicker">
-                                        <input type="text" name="" value="" class="datepicker inp" placeholder="종료일" readonly="true" /> 
+                                    <div class="input-date">
+                                        <input type="text" name="" value="" class="datepicker inp" id="end-date2"
+                                            placeholder="종료일" readonly />
                                         <i class="fa-regular fa-calendar-days"></i>
                                     </div>
                                 </div>
 
                                 <!-- 버튼 -->
                                 <div class="period-btn">
-                                    <a class="btn btn-secondary">오늘</a>
-                                    <a class="btn btn-secondary">7일</a>
-                                    <a class="btn btn-secondary">30일</a>
-                                    <a class="btn btn-secondary">전체</a>
+                                    <button class="btn btn-info" onclick="today('2')">오늘</button>
+                                    <button class="btn btn-info" onclick="week('2')">7일</button>
+                                    <button class="btn btn-info" onclick="month('2')">30일</button>
+                                    <button class="btn btn-info" onclick="allClear('2')">전체</button>
+                                </div>
+
+                                <!-- 테이블 -->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 3%;"><input type="checkbox" class="check-all" checked>
+                                                </th>
+                                                <th style="width: 10%;">요청일</th>
+                                                <th style="width: 10%;">요청자</th>
+                                                <th style="width: 50%;">내용</th>
+                                                <th style="width: 10%;">승인</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2008/12/19</td>
+                                                <td>Tiger Nixon</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">문서 복호화 허가</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2010/10/14</td>
+                                                <td>Garrett Winters</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">회의실 사용 승인해주세요~~</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2013/03/03</td>
+                                                <td>Ashton Cox</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">휴가 사용 승인해주십쇼~</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2008/10/16</td>
+                                                <td>Cedric Kelly</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">개발 승인 부탁드립니다.</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2012/12/18</td>
+                                                <td>Airi Satou</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">문서 암호화 승인해주세요..</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2010/03/17</td>
+                                                <td>Brielle Williamson</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">개발 완료!</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2010/06/09</td>
+                                                <td>Herrod Chandler</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">css 구현 완료했습니다.</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2011/09/03</td>
+                                                <td>Paul Byrd</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">ㅁㅁㅁㅁㅁㅁㅁㅁㅁ</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2009/04/10</td>
+                                                <td>Gloria Little</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="ch" checked></td>
+                                                <td>2012/09/26</td>
+                                                <td>Dai Rios</td>
+                                                <td>
+                                                    <div class="page-wrapper">
+                                                        <a class="content-detail">
+                                                            <span class="text">test</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary ">허가</a>
+                                                    <a class="btn btn-sm btn-secondary">거부</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 3%;"><input type="checkbox" class="check-all" checked></th>
-                                            <th style="width: 10%">요청일</th>
-                                            <th style="width: 10%">요청자</th>
-                                            <th style="width: 50%">내용</th>
-                                            <th style="width: 10%">승인</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" class="ch" checked></td>
-                                            <td>2008/12/19</td>
-                                            <td>Tiger Nixon</td>
-                                            <td>문서 복호화 허가</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm">허가</a>
-                                                <a class="btn btn-sm btn-secondary">거부</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="ch" checked></td>
-                                            <td>2010/10/14</td>
-                                            <td>Garrett Winters</td>
-                                            <td>회의실 사용 승인해주세요~~</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm">허가</a>
-                                                <a class="btn btn-sm btn-secondary">거부</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="ch" checked></td>
-                                            <td>2013/03/03</td>
-                                            <td>Ashton Cox</td>
-                                            <td>휴가 사용 승인해주십쇼~</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm">허가</a>
-                                                <a class="btn btn-sm btn-secondary">거부</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="ch" checked></td>
-                                            <td>2008/10/16</td>
-                                            <td>Cedric Kelly</td>
-                                            <td>개발 승인 부탁드립니다.</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm">허가</a>
-                                                <a class="btn btn-sm btn-secondary">거부</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="ch" checked></td>
-                                            <td>2012/12/18</td>
-                                            <td>Airi Satou</td>
-                                            <td>문서 암호화 승인해주세요..</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm">허가</a>
-                                                <a class="btn btn-sm btn-secondary">거부</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="ch" checked></td>
-                                            <td>2010/03/17</td>
-                                            <td>Brielle Williamson</td>
-                                            <td>개발 완료!</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm">허가</a>
-                                                <a class="btn btn-sm btn-secondary">거부</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="ch" checked></td>
-                                            <td>2010/06/09</td>
-                                            <td>Herrod Chandler</td>
-                                            <td>css 구현 완료했습니다.</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm">허가</a>
-                                                <a class="btn btn-sm btn-secondary">거부</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="ch" checked></td>
-                                            <td>2011/09/03</td>
-                                            <td>Paul Byrd</td>
-                                            <td>ㅁㅁㅁㅁㅁㅁㅁㅁㅁ</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm">허가</a>
-                                                <a class="btn btn-sm btn-secondary">거부</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="ch" checked></td>
-                                            <td>2009/04/10</td>
-                                            <td>Gloria Little</td>
-                                            <td>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm">허가</a>
-                                                <a class="btn btn-sm btn-secondary">거부</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" class="ch" checked></td>
-                                            <td>2012/09/26</td>
-                                            <td>Dai Rios</td>
-                                            <td>test</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm">허가</a>
-                                                <a class="btn btn-sm btn-secondary">거부</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -564,7 +860,66 @@
             </div>
         </div>
     </div>
-    
+
+    <!-- Content Modal -->
+    <div class="modal-wrapper">
+        <div class="modal">
+            <!-- <div class="head">
+                <span class="title font-weight-bold">승인 요청 내용</span>
+                <a class="content-detail btn-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </a>
+            </div>
+            <div class="content">
+                <div>
+                    <span class="font-weight-bold">요청일</span>
+                    <p><span>2008-12-19 13:48</span></p>
+                </div>
+                <div>
+                    <span class="font-weight-bold">요청자</span>
+                    <p><span>2008-12-19 13:48</span></p>
+                </div>
+                <div>
+                    <span class="font-weight-bold">내용</span>
+                    <p><textarea cols="50" rows="3"></textarea></p>
+                </div>
+                <div>
+                    <span class="font-weight-bold">파일</span>
+                </div>
+                <br>
+                <hr>
+            </div> -->
+
+            
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">승인요청 내용</h4>
+                <button type="button" class="close content-detail" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="font-weight-bold">요청일</label>
+                    <input class="form-control" name="" value="2008-12-19 13:48" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-bold">요청자</label>
+                    <input class="form-control" name="" value="Tiger Nixon" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-bold">내용</label>
+                    <textarea class="form-control" rows="3" name="" readonly>문서 복호화 허가</textarea>
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-bold">파일</label>
+                    <input class="form-control" name="" value="" readonly>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modalRegisterBtn" type="button" class="btn btn-outline btn-primary">APPROVAL</button>
+                <button id="modalCloseBtn" type="button" class="btn btn-outline btn-dark">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap core JavaScript-->
     <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -583,7 +938,64 @@
     <script src="js/demo/datatables-demo.js"></script>
 
     <script>
-        $(document).ready(function() {
+        function setSearchDate(start){
+
+            var num = start.substring(0,1);
+            var str = start.substring(1,2);
+
+            var today = new Date();
+
+            //var year = today.getFullYear();
+            //var month = today.getMonth() + 1;
+            //var day = today.getDate();
+
+            var endDate = $.datepicker.formatDate('yy-mm-dd', today);
+            $('#searchEndDate').val(endDate);
+
+            if(str == 'd'){
+                today.setDate(today.getDate() - num);
+            }else if (str == 'w'){
+                today.setDate(today.getDate() - (num*7));
+            }else if (str == 'm'){
+                today.setMonth(today.getMonth() - num);
+                today.setDate(today.getDate() + 1);
+            }
+
+            var startDate = $.datepicker.formatDate('yy-mm-dd', today);
+            $('#searchStartDate').val(startDate);
+                    
+            // 종료일은 시작일 이전 날짜 선택하지 못하도록 비활성화
+            $("#searchEndDate").datepicker( "option", "minDate", startDate );
+
+            // 시작일은 종료일 이후 날짜 선택하지 못하도록 비활성화
+            $("#searchStartDate").datepicker( "option", "maxDate", endDate );
+
+        }
+
+        // 기간 버튼
+        function today(n) {
+            document.getElementById('start-date' + n).value = new Date().toISOString().substring(0, 10);
+            document.getElementById('end-date' + n).value = new Date().toISOString().substring(0, 10);
+        }
+        function week(n) {
+            var date = new Date();
+            date.setDate(date.getDate() - 7);
+            document.getElementById('start-date' + n).value = date.toISOString().substring(0, 10);
+            document.getElementById('end-date' + n).value = new Date().toISOString().substring(0, 10);
+        }
+        function month(n) {
+            var date = new Date();
+            date.setMonth(date.getMonth() + 1);
+            document.getElementById('start-date' + n).value = new Date().toISOString().substring(0, 10);
+            document.getElementById('end-date' + n).value = date.toISOString().substring(0, 10);
+        }
+        function allClear(n) {
+            document.getElementById('start-date' + n).value = 0;
+            document.getElementById('end-date' + n).value = 0;
+        }
+
+
+        $(document).ready(function () {
             // $(".tab .card-header").click(function() {
             //     let tab_id = $(this).attr('data-tab');
 
@@ -595,7 +1007,7 @@
             //     $('#' + tab_id).addClass('show');
             //     $('#' + tab_id).addClass('active');
             // });
-            
+
             // 달력
             $.datepicker.setDefaults({
                 closeText: "닫기",
@@ -610,20 +1022,49 @@
                 dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
                 dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
                 weekHeader: "주",
-                dateFormat: "yy.m.d", // 날짜형태 예)yy년 m월 d일
+                dateFormat: "yy-mm-dd", // 날짜형태 예) yy년 mm월 dd일
                 firstDay: 0,
                 isRTL: false,
                 showMonthAfterYear: true,
                 yearSuffix: "년"
             });
 
-            $(".datepicker").datepicker({
-                minDate: 0
+            $(".datepicker").datepicker();
+
+            $('#start-date1').datepicker("option", "maxDate", $('#end-date1').val());
+            $('#start-date1').datepicker("option", "onClose", function (selectedDate) {
+                $('#end-date1').datepicker("option", "minDate", selectedDate);
             });
 
+            $('#end-date1').datepicker("option", "minDate", $('#start-date1').val());
+            $('#end-date1').datepicker("option", "onClose", function (selectedDate) {
+                $('#start-date1').datepicker("option", "maxDate", selectedDate);
+            });
+
+            $('#start-date2').datepicker("option", "maxDate", $('#end-date2').val());
+            $('#start-date2').datepicker("option", "onClose", function (selectedDate) {
+                $('#end-date2').datepicker("option", "minDate", selectedDate);
+            });
+
+            $('#end-date2').datepicker("option", "minDate", $('#start-date2').val());
+            $('#end-date2').datepicker("option", "onClose", function (selectedDate) {
+                $('#start-date2').datepicker("option", "maxDate", selectedDate);
+            });
+
+            // 테이블
+            $('#dataTable1').DataTable();
+            $('#dataTable2').DataTable();
+
             // 체크박스
-            $('.check-all').click(function() {
-                $('.ch').prop('checked', this.checked); // checked 속성 true
+            $('.check-all').click(function () {
+                $('.ch').prop('checked', this.checked); // checked 속성
+            });
+
+            // 모달창
+            $('.content-detail').on('click', function () {
+                $('.modal-wrapper').toggleClass('open');
+                $('.page-wrapper').toggleClass('blur-it');
+                return false;
             });
         });
     </script>
