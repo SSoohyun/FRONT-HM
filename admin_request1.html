@@ -44,8 +44,8 @@
 
     <style>
         .bg-gradient-primary {
-            background-color: rgb(210, 197, 165);
-            background-image: linear-gradient(20deg, rgb(210, 197, 165) 5%, #4e73df 100%);
+            background-color: #4e73df;
+            background-image: linear-gradient(20deg,#4e73df 5%, #d2c5a5 100%);
             background-size: cover;
         }
 
@@ -80,7 +80,7 @@
             border-bottom: transparent !important;
         }
 
-        /* .input-date {
+        .input-date {
             position: relative;
             align-items: center;
         }
@@ -91,8 +91,8 @@
             top: 5.5%;
             padding: 10px 10px;
             cursor: pointer;
-        } */
-        
+        }
+
         .tab-content {
             padding: 1.25rem;
         }
@@ -108,13 +108,13 @@
             padding-right: 0;
         }
 
-        /* .period {
+        .period {
             width: 30%;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-        } */
+        }
 
         /* .period-btn {
             width: 20%;
@@ -150,22 +150,6 @@
             vertical-align: middle;
         }
 
-        table.dataTable>thead>tr>th:not(.sorting_disabled),
-        table.dataTable>thead>tr>td:not(.sorting_disabled) {
-            padding-right: 10px;
-        }
-
-        .chk {
-            text-align: center;
-        }
-
-        .ch {
-            transform: scale(1.5);
-        }
-
-        .center {
-            text-align: center;
-        }
         /* .sorting_1 {
             text-align: center;
         } */
@@ -211,48 +195,45 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                general
+                admin
             </div>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="index.html">
-                    <i class="fa-solid fa-user-gear"></i>
-                    <span>나의 정보</span></a>
+                    <i class="fa-solid fa-sitemap"></i>
+                    <span>부서 관리</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="index.html">
-                    <i class="fa-solid fa-house"></i>
-                    <span>나의 부서</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fa-solid fa-address-book"></i>
-                    <span>직원 현황</span></a>
+                    <i class="fa-solid fa-users"></i>
+                    <span>직원 관리</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fa-solid fa-list-ol"></i>
-                    <span>승인자 목록</span></a>
+                    <span>승인자 관리</span></a>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                manager
-            </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fa-solid fa-list"></i>
-                    <span>승인요청 목록</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>승인요청 관리</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">요청 분류</h6>
+                        <a class="collapse-item" href="admin_request1.html">개인정보 변경</a>
+                        <a class="collapse-item" href="admin_request2.html">부서정보 변경</a>
+                        <a class="collapse-item" href="admin_request3.html">승인자 권한 부여</a>
+                    </div>
+                </div>
             </li>
-
+            
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -370,7 +351,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">승인요청 관리</h1>
+                    <h1 class="h3 mb-2 text-gray-800">승인요청 관리 > 개인정보 변경 요청</h1>
                     <p class="mb-4">
                         승인요청을 확인하고, 요청을 승인 또는 거부할 수 있습니다.
                     </p>
@@ -493,8 +474,7 @@
                                     <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th class="chk" style="width: 3%;">
-                                                    <input type="checkbox" class="check-all ch" checked>
+                                                <th style="width: 3%;"><input type="checkbox" class="check-all" checked>
                                                 </th>
                                                 <th style="width: 10%;">요청일</th>
                                                 <th style="width: 10%;">요청자</th>
@@ -503,7 +483,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2008/12/19</td>
                                                 <td>Tiger Nixon</td>
                                                 <td>
@@ -515,7 +495,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2010/10/14</td>
                                                 <td>Garrett Winters</td>
                                                 <td>
@@ -527,7 +507,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2013/03/03</td>
                                                 <td>Ashton Cox</td>
                                                 <td>
@@ -539,7 +519,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2008/10/16</td>
                                                 <td>Cedric Kelly</td>
                                                 <td>
@@ -551,7 +531,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2012/12/18</td>
                                                 <td>Airi Satou</td>
                                                 <td>
@@ -563,7 +543,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2010/03/17</td>
                                                 <td>Brielle Williamson</td>
                                                 <td>
@@ -575,7 +555,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2010/06/09</td>
                                                 <td>Herrod Chandler</td>
                                                 <td>
@@ -587,7 +567,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2011/09/03</td>
                                                 <td>Paul Byrd</td>
                                                 <td>
@@ -599,7 +579,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2009/04/10</td>
                                                 <td>Gloria Little</td>
                                                 <td>
@@ -611,7 +591,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2012/09/26</td>
                                                 <td>Dai Rios</td>
                                                 <td>
@@ -709,8 +689,7 @@
                                     <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th class="chk" style="width: 3%;">
-                                                    <input type="checkbox" class="check-all ch" checked>
+                                                <th style="width: 3%;"><input type="checkbox" class="check-all" checked>
                                                 </th>
                                                 <th style="width: 10%;">요청일</th>
                                                 <th style="width: 10%;">요청자</th>
@@ -719,7 +698,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2008/12/19</td>
                                                 <td>Tiger Nixon</td>
                                                 <td>
@@ -731,7 +710,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2010/10/14</td>
                                                 <td>Garrett Winters</td>
                                                 <td>
@@ -743,7 +722,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2013/03/03</td>
                                                 <td>Ashton Cox</td>
                                                 <td>
@@ -755,7 +734,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2008/10/16</td>
                                                 <td>Cedric Kelly</td>
                                                 <td>
@@ -767,7 +746,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2012/12/18</td>
                                                 <td>Airi Satou</td>
                                                 <td>
@@ -779,7 +758,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2010/03/17</td>
                                                 <td>Brielle Williamson</td>
                                                 <td>
@@ -791,7 +770,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2010/06/09</td>
                                                 <td>Herrod Chandler</td>
                                                 <td>
@@ -803,7 +782,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2011/09/03</td>
                                                 <td>Paul Byrd</td>
                                                 <td>
@@ -815,7 +794,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2009/04/10</td>
                                                 <td>Gloria Little</td>
                                                 <td>
@@ -827,7 +806,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                                <td><input type="checkbox" class="ch" checked></td>
                                                 <td>2012/09/26</td>
                                                 <td>Dai Rios</td>
                                                 <td>
@@ -944,14 +923,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <div class="btn-group btn-group-justified" role="group" aria-label="group button">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default content-detail" data-dismiss="modal" role="button">취소</button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" id="positive" class="btn btn-default btn-hover-green" role="button">추가</button>
-                    </div>
-                </div>
+                <button id="modalRegisterBtn" type="button" class="btn btn-outline btn-success">승인</button>
+                <button id="modalCloseBtn" type="button" class="btn btn-outline btn-danger">요청 거부</button>
             </div>
         </div>
     </div>

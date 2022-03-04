@@ -23,9 +23,15 @@
 </head>
 
 <style>
+    .bg-gradient-general {
+        background-color: var(--general);
+        background-image: linear-gradient(180deg,#f8f9fc 10%,var(--general) 100%);
+        background-size: cover;
+    }
+
     .bg-gradient-admin {
-        background-color: #f8f9fc;
-        background-image: linear-gradient(180deg,#f8f9fc 10%,#d2c5a5 100%);
+        background-color: black;
+        background-image: linear-gradient(180deg,#f8f9fc 10%,black 100%);
         background-size: cover;
     }
 
@@ -46,8 +52,8 @@
     .admin {
         width: 50%;
         background: white;
-        color: #3498db;
-        border-bottom: solid 3px #3498db;
+        color: var(--general);
+        border-bottom: solid 3px var(--general);
         float: left;
         height: 60px;
         line-height: 60px;
@@ -68,7 +74,7 @@
     } */
 </style>
 
-<body class="bg-gradient-light">
+<body class="bg-gradient-general">
 
     <div class="container">
 
@@ -110,14 +116,11 @@
                                                     Me</label>
                                             </div>
                                         </div>
+                                        <hr>
                                         <a href="index.html" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </a>
                                     </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -154,19 +157,25 @@
             $(".admin").click(function() {
                 $(".general").css("color", "gray");
                 $(".general").css("border-bottom", "none");
-                $(".admin").css("color", "#d2c5a5");
-                $(".admin").css("border-bottom", "solid 3px #d2c5a5");
-                $(".user a").addClass("btn-warning");
+                
+                $(".admin").css("color", "black");
+                $(".admin").css("border-bottom", "solid 3px black");
+                $("#exampleInputEmail").css("display", "none");
+                $(".custom-control").css("visibility", "hidden");
+                $(".user a").addClass("btn-dark");
                 
                 $('body').addClass('bg-gradient-admin');
             });
 
             $(".general").click(function() {
-                $(".general").css("color", "#3498db");
-                $(".general").css("border-bottom", "solid 3px #3498db");
+                $(".general").css("color", "var(--general)");
+                $(".general").css("border-bottom", "solid 3px var(--general)");
+                $("#exampleInputEmail").css("display", "block");
+                $(".custom-control").css("visibility", "visible");
+                
                 $(".admin").css("color", "gray");
                 $(".admin").css("border-bottom", "none");
-                $(".user a").removeClass("btn-warning");
+                $(".user a").removeClass("btn-dark");
 
                 $('body').removeClass('bg-gradient-admin');
             });
