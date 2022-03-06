@@ -81,6 +81,11 @@
     border-right: 0;
 }
 
+#negative {
+    font-weight: bold;
+    color: var(--danger);
+}
+
 #positive {
     font-weight: bold;
     color: #051367;

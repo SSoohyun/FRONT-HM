@@ -44,8 +44,8 @@
 
     <style>
         .bg-gradient-primary {
-            background-color: #4e73df;
-            background-image: linear-gradient(20deg,#4e73df 5%, #d2c5a5 100%);
+            background-color: black;
+            background-image: linear-gradient(20deg,#4e73df 5%, black 100%);
             background-size: cover;
         }
 
@@ -82,19 +82,27 @@
 
         .input-date {
             position: relative;
-            align-items: center;
+            /* align-items: center; */
         }
 
         .input-date i {
             position: absolute;
-            left: 22%;
-            top: 5.5%;
+            left: 160px;
+            top: -8px;
             padding: 10px 10px;
             cursor: pointer;
         }
 
         .tab-content {
             padding: 1.25rem;
+        }
+
+        .chk {
+            text-align: center;
+        }
+
+        .ch {
+            transform: scale(1.5);
         }
 
         /* .tab-content>.active {
@@ -108,13 +116,13 @@
             padding-right: 0;
         }
 
-        .period {
+        /* .period {
             width: 30%;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-        }
+        } */
 
         /* .period-btn {
             width: 20%;
@@ -133,35 +141,6 @@
         table.dataTable>thead>tr>th:last-child {
             padding-right: 0;
         } */
-
-        div.dataTables_filter label {
-            display: none;
-        }
-
-        table.dataTable>thead>tr>th:first-child::before,
-        table.dataTable>thead>tr>th:first-child::after,
-        table.dataTable>thead>tr>th:last-child::before,
-        table.dataTable>thead>tr>th:last-child::after {
-            content: none;
-        }
-
-        .table td,
-        .table th {
-            vertical-align: middle;
-        }
-
-        /* .sorting_1 {
-            text-align: center;
-        } */
-
-        .btn-sm {
-            border-radius: 0.5rem;
-            border: 0;
-        }
-
-        .title {
-            font-size: 1.3rem;
-        }
 
         .content-detail {
             /* color: #858796; */
@@ -353,7 +332,7 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">승인요청 관리 > 개인정보 변경 요청</h1>
                     <p class="mb-4">
-                        승인요청을 확인하고, 요청을 승인 또는 거부할 수 있습니다.
+                        <b>승인요청을 확인하고, 요청을 승인 또는 거부할 수 있습니다.</b>
                     </p>
 
                     <ul class="nav nav-tabs">
@@ -449,17 +428,17 @@
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                         <div class="clearfix">
                                                             <!-- 시작일 -->
-                                                            <span class="dset">
+                                                            <span class="input-date">
                                                                 <input type="text" name="start-date1" value="" class="datepicker inp" id="start-date1"
                                                                     placeholder="시작일" readonly />
-                                                                <i class="fa-regular fa-calendar-days dateclick"></i>
+                                                                <i class="fa-regular fa-calendar dateclick"></i>
                                                             </span>
                                                             <span class="demi">~</span>
                                                             <!-- 종료일 -->
-                                                            <span class="dset">
+                                                            <span class="input-date">
                                                                 <input type="text" name="end-date1" value="" class="datepicker inp" id="end-date1"
                                                                     placeholder="종료일" readonly />
-                                                                <i class="fa-regular fa-calendar-days dateclick"></i>
+                                                                <i class="fa-regular fa-calendar dateclick"></i>
                                                             </span>
                                                         </div>
                                                     </div> 
@@ -469,142 +448,147 @@
                                     </div>
                                 </div>
 
-                                <!-- 테이블 -->
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 3%;"><input type="checkbox" class="check-all" checked>
-                                                </th>
-                                                <th style="width: 10%;">요청일</th>
-                                                <th style="width: 10%;">요청자</th>
-                                                <th style="width: 50%;">내용</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2008/12/19</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">문서 복호화 허가</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2010/10/14</td>
-                                                <td>Garrett Winters</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">회의실 사용 승인해주세요~~</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2013/03/03</td>
-                                                <td>Ashton Cox</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">휴가 사용 승인해주십쇼~</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2008/10/16</td>
-                                                <td>Cedric Kelly</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">개발 승인 부탁드립니다.</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2012/12/18</td>
-                                                <td>Airi Satou</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">문서 암호화 승인해주세요..</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2010/03/17</td>
-                                                <td>Brielle Williamson</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">개발 완료!</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2010/06/09</td>
-                                                <td>Herrod Chandler</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">css 구현 완료했습니다.</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2011/09/03</td>
-                                                <td>Paul Byrd</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">ㅁㅁㅁㅁㅁㅁㅁㅁㅁ</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2009/04/10</td>
-                                                <td>Gloria Little</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2012/09/26</td>
-                                                <td>Dai Rios</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">test</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <!-- 검색버튼 -->
+                                <div class="row justify-content-center">
+                                    <button class="btn btn-primary mb-4">검색</button>
                                 </div>
+
+                                <!-- 테이블 -->
+                                <table class="table table-hover table-borderless" id="table1" width="100%"
+                                    cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="chk">
+                                                <input type="checkbox" class="check-all ch" checked>
+                                            </th>
+                                            <th>요청일</th>
+                                            <th>요청자</th>
+                                            <th>내용</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2008/12/19</td>
+                                            <td>Tiger Nixon</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">문서 복호화 허가</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2010/10/14</td>
+                                            <td>Garrett Winters</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">회의실 사용 승인해주세요~~</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2013/03/03</td>
+                                            <td>Ashton Cox</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">휴가 사용 승인해주십쇼~</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2008/10/16</td>
+                                            <td>Cedric Kelly</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">개발 승인 부탁드립니다.</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2012/12/18</td>
+                                            <td>Airi Satou</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">문서 암호화 승인해주세요..</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2010/03/17</td>
+                                            <td>Brielle Williamson</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">개발 완료!</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2010/06/09</td>
+                                            <td>Herrod Chandler</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">css 구현 완료했습니다.</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2011/09/03</td>
+                                            <td>Paul Byrd</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">ㅁㅁㅁㅁㅁㅁㅁㅁㅁ</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2009/04/10</td>
+                                            <td>Gloria Little</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2012/09/26</td>
+                                            <td>Dai Rios</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">test</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
 
                             <div class="tab-pane fade show" id="tab2">
@@ -664,17 +648,17 @@
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                         <div class="clearfix">
                                                             <!-- 시작일 -->
-                                                            <span class="dset">
+                                                            <span class="input-date">
                                                                 <input type="text" name="start-date2" value="" class="datepicker inp" id="start-date2"
                                                                     placeholder="시작일" readonly />
-                                                                <i class="fa-regular fa-calendar-days dateclick"></i>
+                                                                <i class="fa-regular fa-calendar dateclick"></i>
                                                             </span>
                                                             <span class="demi">~</span>
                                                             <!-- 종료일 -->
-                                                            <span class="dset">
+                                                            <span class="input-date">
                                                                 <input type="text" name="end-date2" value="" class="datepicker inp" id="end-date2"
                                                                     placeholder="종료일" readonly />
-                                                                <i class="fa-regular fa-calendar-days dateclick"></i>
+                                                                <i class="fa-regular fa-calendar dateclick"></i>
                                                             </span>
                                                         </div>
                                                     </div> 
@@ -684,142 +668,147 @@
                                     </div>
                                 </div>
 
-                                <!-- 테이블 -->
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 3%;"><input type="checkbox" class="check-all" checked>
-                                                </th>
-                                                <th style="width: 10%;">요청일</th>
-                                                <th style="width: 10%;">요청자</th>
-                                                <th style="width: 50%;">내용</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2008/12/19</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">문서 복호화 허가</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2010/10/14</td>
-                                                <td>Garrett Winters</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">회의실 사용 승인해주세요~~</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2013/03/03</td>
-                                                <td>Ashton Cox</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">휴가 사용 승인해주십쇼~</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2008/10/16</td>
-                                                <td>Cedric Kelly</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">개발 승인 부탁드립니다.</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2012/12/18</td>
-                                                <td>Airi Satou</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">문서 암호화 승인해주세요..</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2010/03/17</td>
-                                                <td>Brielle Williamson</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">개발 완료!</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2010/06/09</td>
-                                                <td>Herrod Chandler</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">css 구현 완료했습니다.</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2011/09/03</td>
-                                                <td>Paul Byrd</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">ㅁㅁㅁㅁㅁㅁㅁㅁㅁ</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2009/04/10</td>
-                                                <td>Gloria Little</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="ch" checked></td>
-                                                <td>2012/09/26</td>
-                                                <td>Dai Rios</td>
-                                                <td>
-                                                    <div class="page-wrapper">
-                                                        <a class="content-detail">
-                                                            <span class="text">test</span>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <!-- 검색버튼 -->
+                                <div class="row justify-content-center">
+                                    <button class="btn btn-primary mb-4">검색</button>
                                 </div>
+
+                                <!-- 테이블 -->
+                                <table class="table table-hover table-borderless" id="table2" width="100%"
+                                    cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="chk">
+                                                <input type="checkbox" class="check-all ch" checked>
+                                            </th>
+                                            <th>요청일</th>
+                                            <th>요청자</th>
+                                            <th>내용</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2008/12/19</td>
+                                            <td>Tiger Nixon</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">문서 복호화 허가</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2010/10/14</td>
+                                            <td>Garrett Winters</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">회의실 사용 승인해주세요~~</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2013/03/03</td>
+                                            <td>Ashton Cox</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">휴가 사용 승인해주십쇼~</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2008/10/16</td>
+                                            <td>Cedric Kelly</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">개발 승인 부탁드립니다.</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2012/12/18</td>
+                                            <td>Airi Satou</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">문서 암호화 승인해주세요..</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2010/03/17</td>
+                                            <td>Brielle Williamson</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">개발 완료!</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2010/06/09</td>
+                                            <td>Herrod Chandler</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">css 구현 완료했습니다.</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2011/09/03</td>
+                                            <td>Paul Byrd</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">ㅁㅁㅁㅁㅁㅁㅁㅁㅁ</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2009/04/10</td>
+                                            <td>Gloria Little</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="chk"><input type="checkbox" class="ch" checked></td>
+                                            <td>2012/09/26</td>
+                                            <td>Dai Rios</td>
+                                            <td>
+                                                <div class="page-wrapper">
+                                                    <a class="content-detail">
+                                                        <span class="text">test</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -1072,8 +1061,47 @@
             
 
             // 테이블
-            $('#dataTable1').DataTable();
-            $('#dataTable2').DataTable();
+            // 테이블
+            $('#table1').DataTable({
+                "language": {
+                    "lengthMenu": "페이지 당 _MENU_ 개씩 보기",
+                    "info": "현재 _START_ - _END_ / _TOTAL_건"
+                },
+
+                searching: false, // 검색 비활성화
+                "order": [[ 1, "asc" ]], // 요청일을 기준으로 오름차순 정렬
+                lengthMenu: [10, 20, 30, 40, 50], // 표시 건수 10건 단위로 지정
+                displayLength: 10, // 기본 표시 건수 설정
+
+                // 열 너비 설정
+                bAutoWidth: false, // 너비 자동맞춤을 false로 설정해주어야 지정한 너비가 제대로 출력
+                columnDefs: [
+                    { orderable: false, targets: [0, 2, 3] }, // 정렬 비활성화
+                    { width: "col-md-1", targets: 0 },
+                    { width: "col-md-2", targets: [1, 2] }
+                ]
+            });
+
+            // 테이블
+            $('#table2').DataTable({
+                "language": {
+                    "lengthMenu": "페이지 당 _MENU_ 개씩 보기",
+                    "info": "현재 _START_ - _END_ / _TOTAL_건"
+                },
+
+                searching: false, // 검색 비활성화
+                "order": [[ 1, "asc" ]], // 요청일을 기준으로 오름차순 정렬
+                lengthMenu: [10, 20, 30, 40, 50], // 표시 건수 10건 단위로 지정
+                displayLength: 10, // 기본 표시 건수 설정
+
+                // 열 너비 설정
+                bAutoWidth: false, // 너비 자동맞춤을 false로 설정해주어야 지정한 너비가 제대로 출력
+                columnDefs: [
+                    { orderable: false, targets: [0, 2, 3] }, // 정렬 비활성화
+                    { width: "col-md-1", targets: 0 },
+                    { width: "col-md-2", targets: [1, 2] }
+                ]
+            });
 
             // 체크박스
             $('.check-all').click(function () {
