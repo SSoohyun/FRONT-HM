@@ -1,4 +1,4 @@
-/* calendar */
+/* 달력 */
 .ui-widget-header {
     border: 0px solid #dddddd;
     background: #fff;
@@ -82,7 +82,6 @@
     font-weight: 400;
 }
 
-
 .ui-datepicker-calendar>tbody>tr>td>a {
     color: #000;
     font-size: 12px !important;
@@ -90,7 +89,6 @@
     text-decoration: none;
 
 }
-
 
 .ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover {
     cursor: auto;
@@ -164,7 +162,6 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
-
 
 .inp {
     padding: 10px 10px;

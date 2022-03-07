@@ -3,7 +3,7 @@
     overflow: hidden;
 }
 
-/* 버튼 및 모달 */
+/* 모달창 */
 .page-wrapper {
     display: inline;
     width: 100%;
@@ -70,10 +70,9 @@
 
 .content{
     padding: 3%;
-    text-align: center;
-
-    
+    text-align: center; 
 }
+
 .content input{
     margin: 15px;
 }
