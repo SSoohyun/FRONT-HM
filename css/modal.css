@@ -1,3 +1,8 @@
+/* 바디 스크롤 */
+.scroll {
+    overflow: hidden;
+}
+
 /* 버튼 및 모달 */
 .page-wrapper {
     display: inline;

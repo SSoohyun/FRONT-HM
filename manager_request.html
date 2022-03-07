@@ -499,7 +499,12 @@
 
                                 <!-- 검색버튼 -->
                                 <div class="row justify-content-center">
-                                    <button class="btn btn-primary mb-4">검색</button>
+                                    <a class="btn btn-primary btn-icon-split mb-4">
+                                        <span class="icon text-white-50">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </span>
+                                        <span class="text">검색</span>
+                                    </a>
                                 </div>
 
                                 <!-- 테이블 -->
@@ -729,7 +734,12 @@
 
                                 <!-- 검색버튼 -->
                                 <div class="row justify-content-center">
-                                    <button class="btn btn-primary mb-4">검색</button>
+                                    <a class="btn btn-primary btn-icon-split mb-4">
+                                        <span class="icon text-white-50">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </span>
+                                        <span class="text">검색</span>
+                                    </a>
                                 </div>
 
                                 <!-- 테이블 -->
@@ -958,13 +968,23 @@
                     <label class="font-weight-bold">요청일</label>
                     <input class="form-control" name="" value="2008-12-19 13:48" readonly>
                 </div>
-                <div class="form-group">
-                    <label class="font-weight-bold">요청자</label>
-                    <input class="form-control" name="" value="Tiger Nixon" readonly>
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <label class="font-weight-bold">요청자</label>
+                        <input class="form-control" name="" value="Tiger Nixon" readonly>
+                    </div>
+                    <div class="col-sm-5">
+                        <label class="font-weight-bold">부서</label>
+                        <input class="form-control" name="" value="엔터프라이즈 사업부" readonly>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="font-weight-bold">직급</label>
+                        <input class="form-control" name="" value="사원" readonly>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="font-weight-bold">내용</label>
-                    <textarea class="form-control" rows="3" name="" readonly>문서 복호화 허가</textarea>
+                    <textarea style="resize: none; overflow: auto;" class="form-control" rows="3" name="" readonly>문서 복호화 허가</textarea>
                 </div>
                 <div class="form-group">
                     <label class="font-weight-bold">파일</label>
@@ -1132,7 +1152,11 @@
             $('#table1').DataTable({
                 "language": {
                     "lengthMenu": "페이지 당 _MENU_ 개씩 보기",
-                    "info": "현재 _START_ - _END_ / _TOTAL_건"
+                    "info": "현재 _START_ - _END_ / 전체 _TOTAL_건",
+                    "paginate": {
+                        "next": "다음",
+                        "previous": "이전"
+                    }
                 },
 
                 searching: false, // 검색 비활성화
@@ -1150,8 +1174,19 @@
             });
 
             $('#table2').DataTable({
+                "language": {
+                    "lengthMenu": "페이지 당 _MENU_ 개씩 보기",
+                    "info": "현재 _START_ - _END_ / 전체 _TOTAL_건",
+                    "paginate": {
+                        "next": "다음",
+                        "previous": "이전"
+                    }
+                },
+
                 searching: false, // 검색 비활성화
                 "order": [[ 1, "asc" ]], // 요청일을 기준으로 오름차순 정렬
+                lengthMenu: [10, 20, 30, 40, 50], // 표시 건수 10건 단위로 지정
+                displayLength: 10, // 기본 표시 건수 설정
 
                 // 열 너비 설정
                 bAutoWidth: false, // 너비 자동맞춤을 false로 설정해주어야 지정한 너비가 제대로 출력
@@ -1171,6 +1206,7 @@
             $('.content-detail').on('click', function () {
                 $('.modal-wrapper').toggleClass('open');
                 $('.page-wrapper').toggleClass('blur-it');
+                $('body').toggleClass('scroll');
                 return false;
             });
         });
